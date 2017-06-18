@@ -1,31 +1,17 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <errno.h>
+#include "holberton.h"
 
-void open_and_check_dir(char *path);
-int lstat(const char *path, struct stat *buf);
-char *strcat(char *dest, const char *src);
-char *strcpy(char *dest, const char *src);
-void *malloc(size_t size);
-void free(void *pointer);
-
-int print_dir(char *path, DIR *dir)
+int build_list(DIR *dir)
 {
 	struct dirent *read;
-        struct stat sb;
-        char *cpy;
+	List *list;
 	
+	list = NULL;
 	while ((read = readdir(dir)) != NULL)
         {
-                cpy = malloc(sizeof(path));
-                strcpy(cpy, path);
-                lstat(strcat(cpy, read->d_name), &sb);
-                printf("%s %ld\n", read->d_name, (long) sb.st_size);
-                free(cpy);
-        }
+ 		/* printf("%s\n", read->d_name); */			
+       		sort_dir(&list, read->d_name);
+	}
+	print_list(list);
 	return (0);
 }
 
@@ -41,7 +27,7 @@ void open_and_check_dir(char *path)
 	}
         else 
 	{
-		print_dir(path, dir);
+		build_list(dir);
         	closedir(dir);
 	}
 }
