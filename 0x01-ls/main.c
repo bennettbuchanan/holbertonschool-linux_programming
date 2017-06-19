@@ -8,7 +8,6 @@ int build_list(DIR *dir)
 	list = NULL;
 	while ((read = readdir(dir)) != NULL)
         {
- 		/* printf("%s\n", read->d_name); */			
        		sort_dir(&list, read->d_name);
 	}
 	print_list(list);
@@ -35,16 +34,25 @@ void open_and_check_dir(char *path)
 
 int main(int argc, char **argv) 
 {
-	char *path;
+	int i;
 	
 	if (argc == 1)
 	{
-		path = "./";
+		open_and_check_dir("./");
+	}
+	else if (argc == 2)
+	{
+		open_and_check_dir(argv[1]);
 	}
 	else
 	{
-		path = argv[1];
+		for(i = 1; i < argc; i++)
+		{
+			print_str(argv[i]);
+			print_str(":\n");
+			open_and_check_dir(argv[i]);
+			print_char('\n');
+		}
 	}
-        open_and_check_dir(path);
 	return (0);
 }
