@@ -12,6 +12,7 @@ int build_list(DIR *dir)
        		sort_dir(&list, read->d_name);
 	}
 	print_list(list);
+	free_list(list);
 	return (0);
 }
 

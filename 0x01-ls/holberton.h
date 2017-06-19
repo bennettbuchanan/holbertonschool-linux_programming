@@ -14,6 +14,7 @@ typedef struct List {
   struct List *next;
 } List;
 
+void free_list(List *list);
 int is_cap(char c);
 char normalize_char(char c);
 char *str_copy(char *src);
