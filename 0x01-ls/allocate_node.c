@@ -1,10 +1,17 @@
 #include "holberton.h"
 
+/**
+ * allocate_node - allocate memory for a node in the list.
+ * @str: The str to assign the List struct str value of the node.
+ *
+ * Return: Pointer to the allocated node, NULL if malloc fails.
+ */
 List *allocate_node(char *str)
 {
 	List *node;
 
-	if ((node = malloc(sizeof(List))) == NULL)
+	node = malloc(sizeof(List));
+	if (node == NULL)
 	{
 		return (NULL);
 	}

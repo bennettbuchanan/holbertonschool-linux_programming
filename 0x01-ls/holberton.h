@@ -9,9 +9,17 @@
 #include <errno.h>
 #include <stdlib.h>
 
-typedef struct List {
-  char *str;
-  struct List *next;
+/**
+ * struct List - A node for the list.
+ * @str: The string of the node.
+ * @next: The pointer to the next node in the linked list.
+ *
+ * Description: Defines a node for a linked list.
+ */
+typedef struct List
+{
+	char *str;
+	struct List *next;
 } List;
 
 void free_list(List *list);
