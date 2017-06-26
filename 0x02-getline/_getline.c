@@ -16,26 +16,26 @@ char *_getline(const int fd)
 	char *line;
 	char *tmp;
 	int i;
-	int BUFFER_SIZE = 1024;
+	int buf_size = BUFFER_SIZE;
 
 	if (fd < 0)
 	{
 		return (NULL);
 	}
-	line = malloc(BUFFER_SIZE * sizeof(char));
-	for (i = 0; read(fd, &c, 1) != 0; i++)
+	line = malloc(buf_size * sizeof(char));
+	for (i = 0; read(fd, &c, READ_SIZE) != 0; i++)
 	{
 		if (c == '\n')
 		{
 			line[i] = '\0';
 			return (line);
 		}
-		/* If the line is greater than BUFFER_SIZE */
-		if (i == BUFFER_SIZE)
+		/* If the line is greater than buf_size */
+		if (i == buf_size)
 		{
-			BUFFER_SIZE += BUFFER_SIZE;
+			buf_size += BUFFER_SIZE;
 			tmp = line;
-			line = malloc(BUFFER_SIZE * sizeof(char));
+			line = malloc(buf_size * sizeof(char));
 			memcpy(line, tmp, i);
 			free(tmp);
 		}
